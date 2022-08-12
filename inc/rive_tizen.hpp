@@ -1,12 +1,16 @@
 #include <iostream>
 
-#include "file.hpp"
-#include "math/aabb.hpp"
-#include "artboard.hpp"
-#include "animation/linear_animation_instance.hpp"
+#include "rive/file.hpp"
+#include "rive/math/aabb.hpp"
+#include "rive/artboard.hpp"
+#include "rive/animation/linear_animation_instance.hpp"
 #include "tvg_renderer.hpp"
 
+#ifdef _MSC_VER
+#define RIVE_EXPORT __declspec( dllexport )
+#else
 #define RIVE_EXPORT __attribute__ ((visibility ("default")))
+#endif
 
 RIVE_EXPORT void rive_tizen_print();
 
@@ -27,7 +31,7 @@ namespace rive_tizen
 
 	private:
 		rive::File* m_File;
-		unique_ptr<tvg::SwCanvas> m_Canvas;
+		std::unique_ptr<tvg::SwCanvas> m_Canvas;
 		bool m_Is_Fileloaded;
 
 		int m_Width;
